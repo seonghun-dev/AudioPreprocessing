@@ -8,6 +8,23 @@ import soundfile as sf
 from enum import Enum
 import re
 
+import scipy.signal as signal
+import math
+import librosa
+import matplotlib.pyplot as plt
+import librosa.display
+from PIL import Image
+
+def wav_fft(file_name):
+    audio_sample, sampling_rate = librosa.load(file_name, sr = None)
+    fft_result = librosa.stft(audio_sample, n_fft=1024, hop_length=512, win_length = 1024, window=signal.hann).T
+    mag, phase = librosa.magphase(fft_result)
+    return mag
+
+#normalize_function
+min_level_db = -100
+def _normalize(S):
+    return np.clip((S-min_level_db)/(-min_level_db), 0, 1)
 
 class EncodingType(Enum):
     def __new__(cls, *args, **kwds):
@@ -80,9 +97,10 @@ if __name__ == "__main__":
             noise_file_source = re.findall('(?<=[e][/]).*(?=[.][w][a][v])',noise_file)
             for i in range(100):
                 snr = float(i+1)
-                outputfile_name = clean_file_source[0] +"_" + noise_file_source[0] +"_"+"snr"+ str(int(snr))
+                outputfile_name = clean_file_source[0] +"." + noise_file_source[0] +"."+"snr"+ str(int(snr))
                 print("Now make "+outputfile_name)
                 output_file = "./Output/"+outputfile_name+".wav"
+                output_file_PNG = "./Output_PNG/" + outputfile_name + ".png"
 
                 metadata = sf.info(clean_file)
                 for item in EncodingType:
@@ -118,3 +136,11 @@ if __name__ == "__main__":
                 save_waveform(
                     output_file, mixed_amp, clean_samplerate, encoding_type.subtype
                 )
+
+                mag = wav_fft(output_file)
+                mag_db = librosa.amplitude_to_db(mag)
+                mag_n = _normalize(mag_db)
+
+                librosa.display.specshow(mag_n.T, y_axis='linear', x_axis='time', sr=16000)
+                plt.title('FFT result')
+                plt.savefig(output_file_PNG)
