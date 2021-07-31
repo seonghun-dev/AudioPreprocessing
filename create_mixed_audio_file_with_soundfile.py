@@ -95,9 +95,9 @@ if __name__ == "__main__":
             noise_file = "./Noise/" +noise_file_name
             clean_file_source = re.findall('(?<=[l][/]).*(?=[.][w][a][v])',clean_file)
             noise_file_source = re.findall('(?<=[e][/]).*(?=[.][w][a][v])',noise_file)
-            for i in range(100):
-                snr = float(i+1)
-                outputfile_name = clean_file_source[0] +"." + noise_file_source[0] +"."+"snr"+ str(int(snr))
+            for i in range(10):
+                snr = float(10*i)
+                outputfile_name = clean_file_source[0] +"_" + noise_file_source[0] +"_"+"snr"+ str(int(snr))
                 print("Now make "+outputfile_name)
                 output_file = "./Output/"+outputfile_name+".wav"
                 output_file_PNG = "./Output_PNG/" + outputfile_name + ".png"
