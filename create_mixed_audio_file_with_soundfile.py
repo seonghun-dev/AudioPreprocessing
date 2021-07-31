@@ -65,6 +65,9 @@ def save_waveform(output_path, amp, samplerate, subtype):
 
 if __name__ == "__main__":
     args = get_args()
+    clean_folder = "./Original"
+    noise_folder = "./Noise"
+
 
     clean_file = "./Original/Horn1.wav"
     noise_file = "./Noise/Wave1.wav"
@@ -73,7 +76,7 @@ if __name__ == "__main__":
     for i in range(100):
         snr = float(i)
         outputfile_name = clean_file_source[0] +"_" + noise_file_source[0] +"_"+"snr"+ str(int(snr))
-        print("Now make"+outputfile_name)
+        print("Now make "+outputfile_name)
         output_file = "./Output/"+outputfile_name+".wav"
 
         metadata = sf.info(clean_file)
