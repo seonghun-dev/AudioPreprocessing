@@ -7,7 +7,7 @@
 ## 📀 Install now!  
 
 ```
-git clone 
+git clone https://github.com/seonghun-dev/AudioPreprocessing.git
 ```
 ---
 
