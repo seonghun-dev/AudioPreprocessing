@@ -2,7 +2,9 @@
 
 ## 🌼 Features   
 
---- Making 16bit sound and Make Audio Argumentation, and spectogram
+Preprocessing
+
+-- Making 16bit sound and Make Audio Argumentation, and spectogram
 
 ## 📀 Install now!  
 
