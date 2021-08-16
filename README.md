@@ -2,7 +2,7 @@
 
 ## 🌼 Features   
 
----
+--- Making 16bit sound and Make Audio Argumentation, and spectogram
 
 ## 📀 Install now!  
 
